@@ -18,7 +18,7 @@ class Api::V1::FoodsController < ApplicationController
     @food = Food.new(food_params)
 
     if @food.save
-      render json: @food, status: :created, location: @food
+      render json: FoodSerializer.new(@food), status: :created, location: @food
     else
       render json: @food.errors, status: :unprocessable_entity
     end
@@ -27,7 +27,7 @@ class Api::V1::FoodsController < ApplicationController
   # PATCH/PUT /foods/1
   def update
     if @food.update(food_params)
-      render json: @food
+      render json: FoodSerializer.new(@food)
     else
       render json: @food.errors, status: :unprocessable_entity
     end
